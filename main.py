@@ -11,6 +11,13 @@ from langchain.chains.retrieval_qa.base import RetrievalQA
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+def clear_screen():
+    if os.name == "nt":
+        os.system('cls')
+    else:
+        os.system('clear')
+
+
 warnings.filterwarnings("ignore", category=DeprecationWarning, module="langchain")
 
 logging.basicConfig(level=logging.INFO,
@@ -89,14 +96,14 @@ def ask_question(qa_chain, question):
         logging.error(f"An error occurred while asking the question: {str(e)}")
         return {"error": str(e), "answer": None, "sources": None}
 
-print("==========================================")
-print("                NIKI AI")
-print("==========================================")
 
 if process_pdfs_in_folder(ITEMS_FOLDER, model_name="mistral"):
     logging.info("PDF processing complete.")
     qa_agent = create_qa_agent(model_name="mistral")
-    
+    clear_screen()
+    print("==========================================")
+    print("                NIKI AI")
+    print("==========================================")
     while True:
         user_input = input("\nEnter your question (or type 'exit' to quit):\n>> ")
         if user_input.lower() == 'exit':
