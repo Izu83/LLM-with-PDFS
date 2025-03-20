@@ -1,0 +1,8 @@
+tqdm
+langsmith
+chromadb
+langchain
+langchain-community
+langchain-chroma
+langchain-ollama
+pypdf
